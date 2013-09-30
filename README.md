@@ -32,7 +32,7 @@ so that the file contains code similar to this:
 
     require ::File.expand_path('../config/environment',  __FILE__)
     use StopIt
-    run MyRailsApp::Application
+    run MyRailsApp::Application # Here should be your application class name
 
 To configure which requests should be stopped add config/initializers/stop_it.rb file to your Ruby on Rails app with the following content:
 
@@ -40,7 +40,7 @@ To configure which requests should be stopped add config/initializers/stop_it.rb
 
     end
 
-If the block in stop method returns true than the request will be blocked. If it returns false, the request will be passed to the next middleware. In the following example all requests to /forbidden will be blocked.
+If the block in stop method returns true then the request will be blocked. If it returns false then the request will be passed to the next middleware. In the following example all requests to /forbidden will be blocked.
 
     StopIt.stop do |path_info, remote_addr, query_string, request_method, user_agent|
       path_info == "/forbidden"
