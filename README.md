@@ -46,6 +46,8 @@ If the block in stop method returns true then the request will be blocked. If it
       path_info == "/forbidden"
     end
 
+Requests can be blocked by request path, remote address, query string, HTTP method, and user agent.
+
 ## Contributing
 
 Your contribution is welcome.
