@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-Let's see how to use stop_it with Ruby on Rails apps. To insert stop_it into the stack of middlewares of your app open config.ru file and add line
+Let's see how to use Stop It with Ruby on Rails apps. To insert Stop It into the stack of middlewares of your app open config.ru file and add line
 
     use StopIt
 
