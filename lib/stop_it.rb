@@ -19,7 +19,7 @@ class StopIt
 
     if response == true
       [200, { 'Content-Type' => 'text/html', 'Content-Length' => '0' }, []]
-    elsif response == false
+    elsif !response
       @app.call(env)
     else
       response

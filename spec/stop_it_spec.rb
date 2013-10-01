@@ -20,6 +20,11 @@ describe StopIt do
   end
 
   describe "middleware response" do
+    context "stop block not specified" do
+      before { StopIt.instance_variable_set("@stop", nil) }
+      it_should_behave_like "non-blocker", {}
+    end
+
     context "stop block returns false" do
       before { StopIt.stop { |path_info, remote_addr, query_string, request_method, user_agent| false } }
       it_should_behave_like "non-blocker", {}
