@@ -15,10 +15,14 @@ class StopIt
   end
 
   def call(env)
-    if stop?(env)
-      return [200, { 'Content-Type' => 'text/html', 'Content-Length' => '0' }, []]
-    else
+    response = stop?(env)
+
+    if response == true
+      [200, { 'Content-Type' => 'text/html', 'Content-Length' => '0' }, []]
+    elsif response == false
       @app.call(env)
+    else
+      response
     end
   end
 

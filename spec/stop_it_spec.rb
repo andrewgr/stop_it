@@ -19,14 +19,22 @@ describe StopIt do
     end
   end
 
-  describe "does not stop request if stop block returns false" do
-    before { StopIt.stop { |path_info, remote_addr, query_string, request_method, user_agent| false } }
-    it_should_behave_like "non-blocker", {}
-  end
+  describe "middleware response" do
+    context "stop block returns false" do
+      before { StopIt.stop { |path_info, remote_addr, query_string, request_method, user_agent| false } }
+      it_should_behave_like "non-blocker", {}
+    end
 
-  describe "stops request if stop block returns true" do
-    before { StopIt.stop { |path_info, remote_addr, query_string, request_method, user_agent| true } }
-    it_should_behave_like "blocker", {}
+    context "stop block returns true" do
+      before { StopIt.stop { |path_info, remote_addr, query_string, request_method, user_agent| true } }
+      it_should_behave_like "blocker", {}
+    end
+
+    context "stop block returns rake status" do
+      let(:response) { [403, { 'Content-Type' => 'text/html', 'Content-Length' => '0' }, []] }
+      before { StopIt.stop { |path_info, remote_addr, query_string, request_method, user_agent| response } }
+      specify { middleware.call({}).should == response }
+    end
   end
 
   describe "filter requests by PATH_INFO env variable" do
