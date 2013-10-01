@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "stop_it"
   gem.require_paths = ["lib"]
-  gem.version       = "1.0.0"
+  gem.version       = "1.0.1"
 
   gem.add_development_dependency 'rspec'
 end
