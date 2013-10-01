@@ -48,6 +48,16 @@ If the block in stop method returns true then the request will be blocked. If it
 
 Requests can be blocked by request path, remote address, query string, HTTP method, and user agent.
 
+The block in stop method may return a rake app response like this:
+
+    StopIt.stop do |path_info, remote_addr, query_string, request_method, user_agent|
+      if remote_addr == "127.0.0.2"
+        [403, { 'Content-Type' => 'text/html', 'Content-Length' => '0' }, []]
+      end
+    end
+
+In this case the request will be blocked and the requestor will receive the returned response.
+
 ## Contributing
 
 Your contribution is welcome.
