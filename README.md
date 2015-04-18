@@ -40,12 +40,12 @@ To configure which requests should be stopped add config/initializers/stop_it.rb
 
     end
 
-@Opts@ is a hash with the following keys: @path_info@, @remote_addr@, @query_string@, @request_method@, @http_user_agent@.
+`Opts` is a hash with the following keys: `path_info`, `remote_addr`, `query_string`, `request_method`, `http_user_agent`.
 
 If the block in stop method returns true then the request will be blocked. If it returns false then the request will be passed to the next middleware. In the following example all requests to /forbidden will be blocked.
 
     StopIt.stop do |opts|
-      opts[:path_info] == "/forbidden"
+      opts[:path_info] == '/forbidden'
     end
 
 Requests can be blocked by request path, remote address, query string, HTTP method, and user agent.
