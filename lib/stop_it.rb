@@ -1,7 +1,7 @@
+# Middleware to block unwanted requests to a Rake app
 class StopIt
-
   class << self
-    def stop &block
+    def stop(&block)
       if block_given?
         @stop = block
       else
@@ -15,26 +15,26 @@ class StopIt
   end
 
   def call(env)
-    response = stop?(env)
+    should_be_stopped = request_should_be_stopped?(env)
 
-    if response == true
+    if should_be_stopped == true
       [200, { 'Content-Type' => 'text/html', 'Content-Length' => '0' }, []]
-    elsif !response
+    elsif !should_be_stopped
       @app.call(env)
     else
-      response
+      should_be_stopped
     end
   end
 
   private
 
-  def stop?(env)
+  def request_should_be_stopped?(env)
     StopIt.stop && StopIt.stop.call(
-      env["PATH_INFO"],
-      env["REMOTE_ADDR"],
-      env["QUERY_STRING"],
-      env["REQUEST_METHOD"],
-      env["HTTP_USER_AGENT"]
+      path_info:       env['PATH_INFO'],
+      remote_addr:     env['REMOTE_ADDR'],
+      query_string:    env['QUERY_STRING'],
+      request_method:  env['REQUEST_METHOD'],
+      http_user_agent: env['HTTP_USER_AGENT']
     )
   end
 end

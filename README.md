@@ -36,22 +36,24 @@ so that the file contains code similar to this:
 
 To configure which requests should be stopped add config/initializers/stop_it.rb file to your Ruby on Rails app with the following content:
 
-    StopIt.stop do |path_info, remote_addr, query_string, request_method, user_agent|
+    StopIt.stop do |opts|
 
     end
 
+@Opts@ is a hash with the following keys: @path_info@, @remote_addr@, @query_string@, @request_method@, @http_user_agent@.
+
 If the block in stop method returns true then the request will be blocked. If it returns false then the request will be passed to the next middleware. In the following example all requests to /forbidden will be blocked.
 
-    StopIt.stop do |path_info, remote_addr, query_string, request_method, user_agent|
-      path_info == "/forbidden"
+    StopIt.stop do |opts|
+      opts[:path_info] == "/forbidden"
     end
 
 Requests can be blocked by request path, remote address, query string, HTTP method, and user agent.
 
 The block in stop method may return a rake app response like this:
 
-    StopIt.stop do |path_info, remote_addr, query_string, request_method, user_agent|
-      if remote_addr == "127.0.0.2"
+    StopIt.stop do |opts|
+      if opts[:remote_addr] == '127.0.0.2'
         [403, { 'Content-Type' => 'text/html', 'Content-Length' => '0' }, []]
       end
     end
