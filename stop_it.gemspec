@@ -17,4 +17,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'rubocop', '~> 0.30'
   gem.add_development_dependency 'cane', '~> 2.6', '>= 2.6.1'
+  gem.add_development_dependency 'codeclimate-test-reporter', '~> 0.4', '>= 0.4.7'
 end

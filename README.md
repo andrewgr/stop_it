@@ -1,5 +1,9 @@
 # Stop It
 
+[![Build Status](https://travis-ci.org/andrewgr/stop_it.png)](https://travis-ci.org/andrewgr/stop_it)
+[![Code Climate](https://codeclimate.com/github/andrewgr/stop_it/badges/gpa.svg)](https://codeclimate.com/github/andrewgr/stop_it)
+[![Test Coverage](https://codeclimate.com/github/andrewgr/stop_it/badges/coverage.svg)](https://codeclimate.com/github/andrewgr/stop_it/coverage)
+
 Stop It is a middleware for blocking requests to rake apps.
 
 ## Installation
